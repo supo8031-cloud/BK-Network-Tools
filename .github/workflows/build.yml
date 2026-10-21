@@ -1,4 +1,3 @@
-
 name: Build BK Network Tools APK
 
 on:
@@ -21,12 +20,16 @@ jobs:
           java-version: "17"
 
       - name: Build APK
-        uses: docker://ghcr.io/kivy/buildozer:latest
-        with:
-          args: buildozer android debug
+        run: |
+          docker run --rm \
+            --user 1001:1001 \
+            -v "$PWD":/home/user/hostcwd \
+            -w /home/user/hostcwd \
+            ghcr.io/kivy/buildozer:latest \
+            buildozer android debug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: BK-Network-Tools-APK
-          path: bin/*.apk
+          path: bin/*.BK-Network-Tools-APK
