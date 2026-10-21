@@ -10,15 +10,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
 
       - name: Build APK
-      
-
-      - name: Accept Android SDK licenses
         run: |
           docker run --rm \
             -v "$PWD":/home/user/hostcwd \
