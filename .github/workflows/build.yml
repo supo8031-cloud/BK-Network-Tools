@@ -16,12 +16,15 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build APK
+      
+
+      - name: Accept Android SDK licenses
         run: |
           docker run --rm \
             -v "$PWD":/home/user/hostcwd \
             -w /home/user/hostcwd \
             ghcr.io/kivy/buildozer:latest \
-            android debug
+            sh -c 'yes | buildozer android debug'
 
       - name: Upload APK
         if: success()
