@@ -14,6 +14,9 @@ steps:
 uses: actions/checkout@v4
 
   - name: Build APK
-    uses: docker://ghcr.io/kivy/buildozer:latest
-    with:
-      args: buildozer android debug
+    run: |
+      docker run --rm \
+        -v "$PWD":/home/user/hostcwd \
+        -w /home/user/hostcwd \
+        ghcr.io/kivy/buildozer:latest \
+        buildozer android debug
